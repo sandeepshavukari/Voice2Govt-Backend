@@ -7,6 +7,7 @@ import com.ssd.Voice2Govt.dto.AdminDto;
 import com.ssd.Voice2Govt.dto.CitizenDto;
 import com.ssd.Voice2Govt.dto.ModeratorDto;
 import com.ssd.Voice2Govt.dto.PoliticianDto;
+import com.ssd.Voice2Govt.entity.Admin;
 
 
 
@@ -17,6 +18,10 @@ public interface AdminService {
     List<AdminDto> getAllAdmins();
     AdminDto updateAdmin(Long AdminId,AdminDto updatedAdmin);
     void deleteAdmin(Long AdminId);
+//    AdminDto loginAdmin(Long adminId, String password);
+//    public Admin authenticate(String adminId, String password);
+    public AdminDto loginAdmin(Long adminId, String admPassword) ;
+    
     
     //citizen
     CitizenDto createCitizen(CitizenDto CitizenDto);
@@ -24,6 +29,7 @@ public interface AdminService {
     List<CitizenDto> getAllCitizens();
     CitizenDto updateCitizen(Long CitizenId,CitizenDto updatedCitizen);
     void deleteCitizen(Long CitizenId);
+    
     
     //AUthentication
     
@@ -43,4 +49,5 @@ public interface AdminService {
     List<PoliticianDto> getAllPoliticians();
     PoliticianDto updatePolitician(Long PoliticianId,PoliticianDto updatedPolitician);
     void deletePolitician(Long PoliticianId);
+	
 }

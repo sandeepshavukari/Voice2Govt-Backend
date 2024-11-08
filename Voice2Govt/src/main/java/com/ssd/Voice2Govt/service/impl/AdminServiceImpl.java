@@ -81,6 +81,19 @@ public class AdminServiceImpl implements AdminService{
                 .orElseThrow(() -> new RuntimeException("Admin not found with id: " + adminId));
         adminRepository.delete(existingAdmin);
     }
+    
+    @Override
+    public AdminDto loginAdmin(Long adminId, String admPassword) {
+        Admin admin = adminRepository.findById(adminId)
+                .orElseThrow(() -> new RuntimeException("Admin not found with id: " + adminId));
+
+        if (admin.getAdm_password().equals(admPassword)) {
+            return AdminMapper.mapToAdminDto(admin);
+        } else {
+            throw new RuntimeException("Invalid password");
+        }
+    }
+
 									/*Citizen 
 	----------------------------------------------------------------------------------------------*/
 	@Override
@@ -149,13 +162,11 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public ModeratorDto updateModerator(Long ModeratorId, ModeratorDto updatedModerator) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public void deleteModerator(Long ModeratorId) {
 		// TODO Auto-generated method stub
@@ -163,26 +174,22 @@ public class AdminServiceImpl implements AdminService{
 	}
 										/*Politician
 ----------------------------------------------------------------------------------------------*/
-	
 	@Override
 	public PoliticianDto createPolitician(PoliticianDto politicianDto) {
 	    Politician politician = PoliticianMapper.mapToPolitician(politicianDto);
 	    Politician savedPolitician = politicianRepository.save(politician);
 	    return PoliticianMapper.mapToPoliticianDto(savedPolitician);
 	}
-
 	@Override
 	public PoliticianDto getPoliticianById(Long PoliticianId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public List<PoliticianDto> getAllPoliticians() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public PoliticianDto updatePolitician(Long PoliticianId, PoliticianDto updatedPolitician) {
 		// TODO Auto-generated method stub
@@ -194,11 +201,5 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		
 	}
-
-//	@Override
-//	public boolean authenticateAdmin(String email, String password) {
-//		 Admin admin = adminRepository.findByAdmEmail(email);
-//	        return admin != null && admin.getAdm_password().equals(password);
-//	}
 
 }
