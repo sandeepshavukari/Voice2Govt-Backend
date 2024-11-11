@@ -1,5 +1,7 @@
 package com.ssd.Voice2Govt.service;
 import java.util.List;
+import java.util.Optional;
+
 import com.ssd.Voice2Govt.dto.AdminDto;
 import com.ssd.Voice2Govt.dto.CitizenDto;
 import com.ssd.Voice2Govt.dto.ModeratorDto;
@@ -12,7 +14,7 @@ public interface AdminService {
     List<AdminDto> getAllAdmins();
     AdminDto updateAdmin(Long AdminId,AdminDto updatedAdmin);
     void deleteAdmin(Long AdminId);
-    Admin authenticateAdmin(String username, String password);
+    public Admin authenticateAdmin(String username, String password);
     //citizen
     CitizenDto createCitizen(CitizenDto CitizenDto);
     CitizenDto getCitizenById(Long CitizenId);

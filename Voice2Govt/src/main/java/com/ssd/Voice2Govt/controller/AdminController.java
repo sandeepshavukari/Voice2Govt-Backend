@@ -2,6 +2,7 @@ package com.ssd.Voice2Govt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,6 +13,7 @@ import com.ssd.Voice2Govt.service.AdminService;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admins")
@@ -52,10 +54,12 @@ public class AdminController {
         adminService.deleteAdmin(id);
         return ResponseEntity.ok("Admin deleted successfully.");
     }
+
     @PostMapping("/login")
     public ResponseEntity<String> loginAdmin(@RequestBody AdminDto adminDto) {
-        Admin admin = adminService.authenticateAdmin(adminDto.getAdm_username(), adminDto.getAdm_password());
-
+        // Authenticate admin using updated field names
+        Admin admin = adminService.authenticateAdmin(adminDto.getAdmUsername(), adminDto.getAdmPassword());
+        
         if (admin != null) {
             String welcomeMessage = "Welcome, " + admin.getAdm_firstName() + " " + admin.getAdm_lastName() + "!";
             return ResponseEntity.ok(welcomeMessage);  // Return personalized welcome message
@@ -63,18 +67,6 @@ public class AdminController {
             return ResponseEntity.status(401).body("Invalid username or password");
         }
     }
-//    @PostMapping("/login")
-//    public ResponseEntity<String> loginAdmin(@RequestBody AdminDto adminDto) {
-//        boolean isAuthenticated = adminService.authenticateAdmin(adminDto.getAdm_email(), adminDto.getAdm_password());
-//        if (isAuthenticated) {
-//            return ResponseEntity.ok("Login successful");
-//        } else {
-//            return ResponseEntity.status(401).body("Invalid email or password");
-//        }
-//    }
-   
-
-    // Logout method to invalidate the session
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // Invalidates the session

@@ -1,5 +1,6 @@
 package com.ssd.Voice2Govt.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.GeneratedValue;
@@ -12,8 +13,8 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Admin {
 	@Id
@@ -24,6 +25,7 @@ public class Admin {
 	private String adm_email;
 	private String adm_phoneNumber;
 	private String adm_dob;
-	private String adm_username;
-	private String adm_password;
+	@Column(name = "adm_username")
+	private String admUsername;
+	private String admPassword;
 }

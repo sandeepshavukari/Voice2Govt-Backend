@@ -17,7 +17,7 @@ public class AdminDto {
     private String adm_email;
     private String adm_phoneNumber;
     private String adm_dob;
-    private String adm_username;
-    private String adm_password;
+    private String admUsername;
+    private String admPassword;
     
 }

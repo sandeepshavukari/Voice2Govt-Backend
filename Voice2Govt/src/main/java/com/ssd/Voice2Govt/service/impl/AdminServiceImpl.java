@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssd.Voice2Govt.dto.AdminDto;
@@ -29,10 +30,16 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class AdminServiceImpl implements AdminService{
+	@Autowired
 	private AdminRepository adminRepository;
 	private CitizenRepository citizenRepository;
 	private ModeratorRepository moderatorRepository;
 	private PoliticianRepository politicianRepository;
+	
+	@Autowired
+    public AdminServiceImpl(AdminRepository adminRepository) {
+        this.adminRepository = adminRepository;
+    }
 									/*Admin
 	----------------------------------------------------------------------------------------------*/
 	@Override
@@ -64,8 +71,8 @@ public class AdminServiceImpl implements AdminService{
         existingAdmin.setAdm_email(updatedAdmin.getAdm_email());
         existingAdmin.setAdm_phoneNumber(updatedAdmin.getAdm_phoneNumber());
         existingAdmin.setAdm_dob(updatedAdmin.getAdm_dob());
-        existingAdmin.setAdm_username(updatedAdmin.getAdm_username());
-        existingAdmin.setAdm_password(updatedAdmin.getAdm_password());
+        existingAdmin.setAdmUsername(updatedAdmin.getAdmUsername());
+        existingAdmin.setAdmPassword(updatedAdmin.getAdmPassword());
 
         Admin savedAdmin = adminRepository.save(existingAdmin);
         return AdminMapper.mapToAdminDto(savedAdmin);
@@ -77,13 +84,13 @@ public class AdminServiceImpl implements AdminService{
         adminRepository.delete(existingAdmin);
     }
     @Override
-    public Admin authenticateAdmin(String username, String password) {
-        Optional<Admin> admin = adminRepository.findByAdm_username(username);
-        if (admin.isPresent() && admin.get().getAdm_password().equals(password)) {
-            return admin.get();  // Return Admin details
-        }
-        return null;  // Invalid credentials
-    }
+	public Admin authenticateAdmin(String username, String password) {
+		Optional<Admin> admin = adminRepository.findByAdmUsername(username);  // Use updated field name
+	    if (admin.isPresent() && admin.get().getAdmPassword().equals(password)) {  // Use updated field name
+	        return admin.get();  // Return Admin details if authentication is successful
+	    }
+	    return null;
+	}
 									/*Citizen 
 	----------------------------------------------------------------------------------------------*/
 	@Override
@@ -180,4 +187,7 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		
 	}
+	
+
+	
 }
