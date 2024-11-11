@@ -28,12 +28,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class AdminServiceImpl implements AdminService{
-	
 	private AdminRepository adminRepository;
 	private CitizenRepository citizenRepository;
 	private ModeratorRepository moderatorRepository;
 	private PoliticianRepository politicianRepository;
-
 									/*Admin
 	----------------------------------------------------------------------------------------------*/
 	@Override
@@ -42,14 +40,12 @@ public class AdminServiceImpl implements AdminService{
 		Admin savedAdmin=adminRepository.save(admin);
         return AdminMapper.mapToAdminDto(savedAdmin);
 	}
-
 	@Override
 	public AdminDto getAdminById(Long adminId) {
         Admin admin = adminRepository.findById(adminId)
                 .orElseThrow(() -> new RuntimeException("Admin not found with id: " + adminId));
         return AdminMapper.mapToAdminDto(admin);
     }
-
     @Override
     public List<AdminDto> getAllAdmins() {
         List<Admin> admins = adminRepository.findAll();
@@ -57,43 +53,28 @@ public class AdminServiceImpl implements AdminService{
                 .map(AdminMapper::mapToAdminDto)
                 .collect(Collectors.toList());
     }
-
     @Override
     public AdminDto updateAdmin(Long adminId, AdminDto updatedAdmin) {
         Admin existingAdmin = adminRepository.findById(adminId)
                 .orElseThrow(() -> new RuntimeException("Admin not found with id: " + adminId));
-
         // Update fields
         existingAdmin.setAdm_firstName(updatedAdmin.getAdm_firstName());
         existingAdmin.setAdm_lastName(updatedAdmin.getAdm_lastName());
         existingAdmin.setAdm_email(updatedAdmin.getAdm_email());
         existingAdmin.setAdm_phoneNumber(updatedAdmin.getAdm_phoneNumber());
         existingAdmin.setAdm_dob(updatedAdmin.getAdm_dob());
+        existingAdmin.setAdm_username(updatedAdmin.getAdm_username());
         existingAdmin.setAdm_password(updatedAdmin.getAdm_password());
 
         Admin savedAdmin = adminRepository.save(existingAdmin);
         return AdminMapper.mapToAdminDto(savedAdmin);
     }
-
     @Override
     public void deleteAdmin(Long adminId) {
         Admin existingAdmin = adminRepository.findById(adminId)
                 .orElseThrow(() -> new RuntimeException("Admin not found with id: " + adminId));
         adminRepository.delete(existingAdmin);
     }
-    
-    @Override
-    public AdminDto loginAdmin(Long adminId, String admPassword) {
-        Admin admin = adminRepository.findById(adminId)
-                .orElseThrow(() -> new RuntimeException("Admin not found with id: " + adminId));
-
-        if (admin.getAdm_password().equals(admPassword)) {
-            return AdminMapper.mapToAdminDto(admin);
-        } else {
-            throw new RuntimeException("Invalid password");
-        }
-    }
-
 									/*Citizen 
 	----------------------------------------------------------------------------------------------*/
 	@Override
@@ -102,14 +83,12 @@ public class AdminServiceImpl implements AdminService{
 	    Citizen savedCitizen = citizenRepository.save(citizen);
 	    return CitizenMapper.mapToCitizenDto(savedCitizen);
 	}
-
     @Override
     public CitizenDto getCitizenById(Long citizenId) {
         Citizen citizen = citizenRepository.findById(citizenId)
                 .orElseThrow(() -> new RuntimeException("Citizen not found with id: " + citizenId));
         return CitizenMapper.mapToCitizenDto(citizen);
     }
-
     @Override
     public List<CitizenDto> getAllCitizens() {
         List<Citizen> citizens = citizenRepository.findAll();
@@ -117,12 +96,10 @@ public class AdminServiceImpl implements AdminService{
                 .map(CitizenMapper::mapToCitizenDto)
                 .collect(Collectors.toList());
     }
-
     @Override
     public CitizenDto updateCitizen(Long citizenId, CitizenDto updatedCitizen) {
         Citizen existingCitizen = citizenRepository.findById(citizenId)
                 .orElseThrow(() -> new RuntimeException("Citizen not found with id: " + citizenId));
-
         // Update fields
         existingCitizen.setCti_firstName(updatedCitizen.getCti_firstName());
         existingCitizen.setCti_lastName(updatedCitizen.getCti_lastName());
@@ -130,18 +107,15 @@ public class AdminServiceImpl implements AdminService{
         existingCitizen.setCti_phoneNumber(updatedCitizen.getCti_phoneNumber());
         existingCitizen.setCti_dob(updatedCitizen.getCti_dob());
         existingCitizen.setCti_password(updatedCitizen.getCti_password());
-
         Citizen savedCitizen = citizenRepository.save(existingCitizen);
         return CitizenMapper.mapToCitizenDto(savedCitizen);
     }
-
     @Override
     public void deleteCitizen(Long citizenId) {
         Citizen existingCitizen = citizenRepository.findById(citizenId)
                 .orElseThrow(() -> new RuntimeException("Citizen not found with id: " + citizenId));
         citizenRepository.delete(existingCitizen);
     }
-
 										/*Moderator
 	----------------------------------------------------------------------------------------------*/
 	@Override
@@ -150,13 +124,11 @@ public class AdminServiceImpl implements AdminService{
 	    Moderator savedModerator = moderatorRepository.save(moderator);
 	    return ModeratorMapper.mapToModeratorDto(savedModerator);
 	}
-
 	@Override
 	public ModeratorDto getModeratorById(Long ModeratorId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public List<ModeratorDto> getAllModerators() {
 		// TODO Auto-generated method stub
@@ -170,7 +142,6 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void deleteModerator(Long ModeratorId) {
 		// TODO Auto-generated method stub
-		
 	}
 										/*Politician
 ----------------------------------------------------------------------------------------------*/
@@ -195,11 +166,9 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public void deletePolitician(Long PoliticianId) {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

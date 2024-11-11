@@ -12,6 +12,7 @@ public class AdminMapper {
             admin.getAdm_email(),
             admin.getAdm_phoneNumber(),
             admin.getAdm_dob(),
+            admin.getAdm_username(),
             admin.getAdm_password()
         );
     }
@@ -24,6 +25,7 @@ public class AdminMapper {
             adminDto.getAdm_email(),
             adminDto.getAdm_phoneNumber(),
             adminDto.getAdm_dob(),
+            adminDto.getAdm_username(),
             adminDto.getAdm_password()
         );
     }

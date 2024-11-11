@@ -61,25 +61,7 @@ public class AdminController {
 //            return ResponseEntity.status(401).body("Invalid email or password");
 //        }
 //    }
-    @PostMapping("/login")
-    public ModelAndView login(@RequestParam("adminId") Long adminId, @RequestParam("admPassword") String admPassword, HttpSession session) {
-        AdminDto admin = adminService.loginAdmin(adminId, admPassword);
-
-        if (admin != null) {
-            // Store user details in the session
-            session.setAttribute("firstName", admin.getAdm_firstName());
-            session.setAttribute("lastName", admin.getAdm_lastName());
-            
-            // Redirect to a dashboard or home page
-            ModelAndView modelAndView = new ModelAndView("welcomePage");
-            modelAndView.addObject("firstName", admin.getAdm_firstName());
-            modelAndView.addObject("lastName", admin.getAdm_lastName());
-            return modelAndView;
-        } else {
-            // Return login failure message
-            return new ModelAndView("loginPage", "message", "Invalid login credentials");
-        }
-    }
+   
 
     // Logout method to invalidate the session
     @GetMapping("/logout")

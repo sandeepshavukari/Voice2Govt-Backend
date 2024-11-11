@@ -18,5 +18,6 @@ public class CitizenDto {
 	private String cti_email;
 	private String cti_phoneNumber;
 	private String cti_dob;
+	private String cti_username;
 	private String cti_password;
 }

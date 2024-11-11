@@ -14,6 +14,7 @@ public class PoliticianMapper {
 				politician.getPol_email(),
 				politician.getPol_phoneNumber(),
 				politician.getPol_dob(),
+				politician.getPol_username(),
 				politician.getPol_password()
 		);
 	}
@@ -26,6 +27,7 @@ public class PoliticianMapper {
 	                politicianDto.getPol_email(),
 	                politicianDto.getPol_phoneNumber(),
 	                politicianDto.getPol_dob(),
+	                politicianDto.getPol_username(),
 	                politicianDto.getPol_password()
 	        );
 	    }

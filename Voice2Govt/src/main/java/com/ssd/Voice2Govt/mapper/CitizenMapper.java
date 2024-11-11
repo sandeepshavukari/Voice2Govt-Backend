@@ -14,6 +14,7 @@ public class CitizenMapper {
 				citizen.getCti_email(),
 				citizen.getCti_phoneNumber(),
 				citizen.getCti_dob(),
+				citizen.getCti_username(),
 				citizen.getCti_password()
 		);
 	}
@@ -26,6 +27,7 @@ public class CitizenMapper {
 	                citizenDto.getCti_email(),
 	                citizenDto.getCti_phoneNumber(),
 	                citizenDto.getCti_dob(),
+	                citizenDto.getCti_username(),
 	                citizenDto.getCti_password()
 	        );
 	    }

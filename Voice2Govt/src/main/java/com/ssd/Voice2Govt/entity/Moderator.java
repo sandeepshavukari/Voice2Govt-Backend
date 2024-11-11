@@ -24,5 +24,6 @@ public class Moderator {
 	private String mod_email;
 	private String mod_phoneNumber;
 	private String mod_dob;
+	private String mod_username;
 	private String mod_password;
 }

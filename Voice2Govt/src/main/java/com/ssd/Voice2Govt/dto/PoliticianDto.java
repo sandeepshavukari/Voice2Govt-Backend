@@ -18,5 +18,6 @@ public class PoliticianDto {
 	private String pol_email;
 	private String pol_phoneNumber;
 	private String pol_dob;
+	private String pol_username;
 	private String pol_password;
 }
