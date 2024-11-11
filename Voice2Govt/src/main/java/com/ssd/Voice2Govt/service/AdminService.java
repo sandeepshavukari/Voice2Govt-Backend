@@ -12,6 +12,7 @@ public interface AdminService {
     List<AdminDto> getAllAdmins();
     AdminDto updateAdmin(Long AdminId,AdminDto updatedAdmin);
     void deleteAdmin(Long AdminId);
+    Admin authenticateAdmin(String username, String password);
     //citizen
     CitizenDto createCitizen(CitizenDto CitizenDto);
     CitizenDto getCitizenById(Long CitizenId);

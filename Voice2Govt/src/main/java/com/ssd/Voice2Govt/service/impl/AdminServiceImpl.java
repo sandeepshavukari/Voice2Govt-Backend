@@ -1,6 +1,7 @@
 package com.ssd.Voice2Govt.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -74,6 +75,14 @@ public class AdminServiceImpl implements AdminService{
         Admin existingAdmin = adminRepository.findById(adminId)
                 .orElseThrow(() -> new RuntimeException("Admin not found with id: " + adminId));
         adminRepository.delete(existingAdmin);
+    }
+    @Override
+    public Admin authenticateAdmin(String username, String password) {
+        Optional<Admin> admin = adminRepository.findByAdm_username(username);
+        if (admin.isPresent() && admin.get().getAdm_password().equals(password)) {
+            return admin.get();  // Return Admin details
+        }
+        return null;  // Invalid credentials
     }
 									/*Citizen 
 	----------------------------------------------------------------------------------------------*/

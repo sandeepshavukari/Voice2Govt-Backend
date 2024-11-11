@@ -52,6 +52,17 @@ public class AdminController {
         adminService.deleteAdmin(id);
         return ResponseEntity.ok("Admin deleted successfully.");
     }
+    @PostMapping("/login")
+    public ResponseEntity<String> loginAdmin(@RequestBody AdminDto adminDto) {
+        Admin admin = adminService.authenticateAdmin(adminDto.getAdm_username(), adminDto.getAdm_password());
+
+        if (admin != null) {
+            String welcomeMessage = "Welcome, " + admin.getAdm_firstName() + " " + admin.getAdm_lastName() + "!";
+            return ResponseEntity.ok(welcomeMessage);  // Return personalized welcome message
+        } else {
+            return ResponseEntity.status(401).body("Invalid username or password");
+        }
+    }
 //    @PostMapping("/login")
 //    public ResponseEntity<String> loginAdmin(@RequestBody AdminDto adminDto) {
 //        boolean isAuthenticated = adminService.authenticateAdmin(adminDto.getAdm_email(), adminDto.getAdm_password());
