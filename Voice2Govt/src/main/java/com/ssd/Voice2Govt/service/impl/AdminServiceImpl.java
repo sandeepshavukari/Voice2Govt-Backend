@@ -122,7 +122,8 @@ public class AdminServiceImpl implements AdminService{
         existingCitizen.setCti_email(updatedCitizen.getCti_email());
         existingCitizen.setCti_phoneNumber(updatedCitizen.getCti_phoneNumber());
         existingCitizen.setCti_dob(updatedCitizen.getCti_dob());
-        existingCitizen.setCti_password(updatedCitizen.getCti_password());
+        existingCitizen.setCtiPassword(updatedCitizen.getCtiPassword());
+        existingCitizen.setCtiConstituency(updatedCitizen.getCtiConstituency());
         Citizen savedCitizen = citizenRepository.save(existingCitizen);
         return CitizenMapper.mapToCitizenDto(savedCitizen);
     }

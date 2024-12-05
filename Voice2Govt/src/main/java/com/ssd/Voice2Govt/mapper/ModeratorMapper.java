@@ -14,8 +14,8 @@ public class ModeratorMapper {
 				moderator.getMod_email(),
 				moderator.getMod_phoneNumber(),
 				moderator.getMod_dob(),
-				moderator.getMod_username(),
-				moderator.getMod_password()
+				moderator.getModUsername(),
+				moderator.getModPassword()
 		);
 	}
 	 public static Moderator mapToModerator(ModeratorDto moderatorDto)
@@ -27,8 +27,8 @@ public class ModeratorMapper {
 	                moderatorDto.getMod_email(),
 	                moderatorDto.getMod_phoneNumber(),
 	                moderatorDto.getMod_dob(),
-	                moderatorDto.getMod_username(),
-	                moderatorDto.getMod_password()
+	                moderatorDto.getModUsername(),
+	                moderatorDto.getModPassword()
 	        );
 	    }
 
