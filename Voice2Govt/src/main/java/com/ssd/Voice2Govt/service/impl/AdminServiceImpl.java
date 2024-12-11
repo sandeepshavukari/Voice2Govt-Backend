@@ -32,9 +32,13 @@ import lombok.AllArgsConstructor;
 public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private AdminRepository adminRepository;
+	 @Autowired
 	private CitizenRepository citizenRepository;
+	 @Autowired
 	private ModeratorRepository moderatorRepository;
-	private PoliticianRepository politicianRepository;
+	
+	 @Autowired
+	 private PoliticianRepository politicianRepository;
 	
 	@Autowired
     public AdminServiceImpl(AdminRepository adminRepository) {
@@ -169,25 +173,45 @@ public class AdminServiceImpl implements AdminService{
 	    return PoliticianMapper.mapToPoliticianDto(savedPolitician);
 	}
 	@Override
-	public PoliticianDto getPoliticianById(Long PoliticianId) {
-		// TODO Auto-generated method stub
-		return null;
+	public PoliticianDto getPoliticianById(Long polId) {
+	    Politician politician = politicianRepository.findByPolId(polId)
+	            .orElseThrow(() -> new RuntimeException("Politician not found with id: " + polId));
+	    return PoliticianMapper.mapToPoliticianDto(politician);
 	}
+
 	@Override
 	public List<PoliticianDto> getAllPoliticians() {
-		// TODO Auto-generated method stub
-		return null;
+	    List<Politician> politicians = politicianRepository.findAll();
+	    return politicians.stream()
+	            .map(PoliticianMapper::mapToPoliticianDto)
+	            .collect(Collectors.toList());
+	}
+
+	@Override
+	public PoliticianDto updatePolitician(Long polId, PoliticianDto updatedPolitician) {
+	    Politician existingPolitician = politicianRepository.findByPolId(polId)
+	            .orElseThrow(() -> new RuntimeException("Politician not found with id: " + polId));
+	    
+	    // Update fields
+	    existingPolitician.setPol_firstName(updatedPolitician.getPol_firstName());
+	    existingPolitician.setPol_lastName(updatedPolitician.getPol_lastName());
+	    existingPolitician.setPol_email(updatedPolitician.getPol_email());
+	    existingPolitician.setPol_phoneNumber(updatedPolitician.getPol_phoneNumber());
+	    existingPolitician.setPol_dob(updatedPolitician.getPol_dob());
+	    existingPolitician.setPolUsername(updatedPolitician.getPolUsername());
+	    existingPolitician.setPolPassword(updatedPolitician.getPolPassword());
+	    existingPolitician.setPolConstituency(updatedPolitician.getPolConstituency());
+
+	    Politician savedPolitician = politicianRepository.save(existingPolitician);
+	    return PoliticianMapper.mapToPoliticianDto(savedPolitician);
 	}
 	@Override
-	public PoliticianDto updatePolitician(Long PoliticianId, PoliticianDto updatedPolitician) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deletePolitician(Long polId) {
+	    Politician existingPolitician = politicianRepository.findByPolId(polId)
+	            .orElseThrow(() -> new RuntimeException("Politician not found with id: " + polId));
+	    politicianRepository.delete(existingPolitician);
 	}
-	@Override
-	public void deletePolitician(Long PoliticianId) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 
 	

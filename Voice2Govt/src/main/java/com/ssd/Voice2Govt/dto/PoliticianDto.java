@@ -24,5 +24,5 @@ public class PoliticianDto {
     private String polUsername;
     private String polPassword;
     private String polConstituency;
-    private List<Issue> issues;
+    //private List<Issue> issues;
 }

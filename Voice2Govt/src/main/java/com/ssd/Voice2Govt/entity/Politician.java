@@ -34,6 +34,6 @@ public class Politician {
     private String polUsername;
     private String polPassword;
     private String polConstituency;
-	 @OneToMany(mappedBy = "politician")
-	    private List<Issue> issues;
+	// @OneToMany(mappedBy = "politician")
+	  //  private List<Issue> issues;
 }

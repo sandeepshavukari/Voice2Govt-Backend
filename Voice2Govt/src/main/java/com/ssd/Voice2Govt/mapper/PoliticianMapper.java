@@ -20,8 +20,8 @@ public class PoliticianMapper {
                 politician.getPol_dob(),
                 politician.getPolUsername(),
                 politician.getPolPassword(),  // (Consider security for sensitive data)
-                politician.getPolConstituency(),
-                politician.getIssues()  // Mapping the issues List from Politician to DTO
+                politician.getPolConstituency()
+               // politician.getIssues()  // Mapping the issues List from Politician to DTO
         );
     }
 
@@ -40,8 +40,8 @@ public class PoliticianMapper {
                 politicianDto.getPol_dob(),
                 politicianDto.getPolUsername(),
                 politicianDto.getPolPassword(),  // (Consider security for sensitive data)
-                politicianDto.getPolConstituency(),
-                politicianDto.getIssues()  // Mapping the issues List from DTO to Politician
+                politicianDto.getPolConstituency()
+               // politicianDto.getIssues()  // Mapping the issues List from DTO to Politician
         );
     }
 }
